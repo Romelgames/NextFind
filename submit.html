@@ -1,0 +1,147 @@
+
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Advertentie plaatsen | NextFind</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="top">NEXTFIND · GRATIS ADVERTEREN</div>
+
+  <header class="nav">
+    <div class="wrap">
+      <a class="logo" href="index.html">NEXT<span>FIND.</span></a>
+      <a href="index.html">← Naar de winkel</a>
+    </div>
+  </header>
+
+  <main class="section">
+    <div class="wrap" style="max-width:760px">
+      <div class="eyebrow">GRATIS AANBIEDEN</div>
+      <h1>Verkoop jouw spullen.</h1>
+      <p class="muted">
+        Je advertentie wordt eerst door NextFind gecontroleerd.
+        Kopers nemen contact op met NextFind. Wij geven de
+        aanvraag vervolgens aan jou door.
+      </p>
+
+      <div class="panel" id="authPanel">
+        <h2>1. Log in of maak een account</h2>
+
+        <form id="authForm" class="form-grid">
+          <label>
+            E-mail
+            <input class="field" id="email"
+                   type="email" required>
+          </label>
+
+          <label>
+            Wachtwoord (minimaal 8 tekens)
+            <input class="field" id="password"
+                   type="password" minlength="8" required>
+          </label>
+
+          <div class="full">
+            <button class="btn" type="submit">
+              INLOGGEN
+            </button>
+            <button class="btn secondary"
+                    type="button" id="signup">
+              ACCOUNT MAKEN
+            </button>
+          </div>
+        </form>
+
+        <p class="muted">
+          Bij registratie ontvang je mogelijk een bevestigingsmail.
+        </p>
+      </div>
+
+      <div id="editor" class="hidden">
+        <button class="btn secondary" id="logout">
+          Uitloggen
+        </button>
+
+        <div class="panel">
+          <h2>2. Advertentie insturen</h2>
+
+          <form id="listingForm" class="form-grid">
+            <label>
+              Productnaam
+              <input class="field" id="name"
+                     maxlength="150" required>
+            </label>
+
+            <label>
+              Vraagprijs (€)
+              <input class="field" id="price"
+                     type="number" min="0" max="999999"
+                     step="0.01" required>
+            </label>
+
+            <label>
+              Categorie
+              <select class="field" id="category">
+                <option>Meubels</option>
+                <option>Elektronica</option>
+                <option>Gaming</option>
+                <option>Overig</option>
+              </select>
+            </label>
+
+            <label>
+              Staat
+              <input class="field" id="condition"
+                     maxlength="120" required
+                     placeholder="Bijv. gebruikt, goede staat">
+            </label>
+
+            <label class="full">
+              Beschrijving
+              <textarea class="field" id="description"
+                        maxlength="3000" required></textarea>
+            </label>
+
+            <label class="full">
+              Productfoto (JPG, PNG of WebP, max. 5 MB)
+              <input class="field" id="photo"
+                     type="file"
+                     accept="image/jpeg,image/png,image/webp"
+                     required>
+            </label>
+
+            <label class="full">
+              Contact-e-mailadres (niet openbaar)
+              <input class="field" id="contact"
+                     type="email" required>
+            </label>
+
+            <label class="full">
+              <input id="consent" type="checkbox" required>
+              Ik geef toestemming dat NextFind mijn gegevens
+              gebruikt om contact over deze advertentie
+              en kopersaanvragen mogelijk te maken.
+            </label>
+
+            <div class="full">
+              <button class="btn" id="send" type="submit">
+                TER GOEDKEURING INSTUREN
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <h2>Mijn inzendingen</h2>
+        <div id="mine" class="admin-list"></div>
+      </div>
+
+      <p id="status" class="status" role="status"></p>
+    </div>
+  </main>
+
+  <script src="config.js"></script>
+  <script type="module" src="submit.js"></script>
+</body>
+</html>
