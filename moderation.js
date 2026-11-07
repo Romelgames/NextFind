@@ -1,10 +1,8 @@
 
-import { createClient } from
-  'https://esm.sh/@supabase/supabase-js@2';
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 
 const config = window.NEXTFIND_CONFIG;
 const db = createClient(config.supabaseUrl, config.supabaseKey);
-
 const dashboard = document.getElementById('dashboard');
 
 if (dashboard) {
@@ -14,8 +12,7 @@ if (dashboard) {
   root.innerHTML = `
     <h2>Ingezonden advertenties</h2>
     <p class="muted">
-      Controleer de advertentie en foto.
-      Bij goedkeuren verschijnt het product op NextFind.
+      Controleer iedere advertentie voordat je deze publiceert.
     </p>
     <button type="button" class="btn secondary"
             id="refreshSubmissions">
@@ -30,22 +27,27 @@ if (dashboard) {
   const list = root.querySelector('#moderationList');
   const message = root.querySelector('#moderationStatus');
 
-  root.querySelector('#refreshSubmissions').onclick = refresh;
+  root.querySelector('#refreshSubmissions')
+    .addEventListener('click', refresh);
 
   async function refresh() {
     const { data: authData } = await db.auth.getUser();
 
-    if (!authData.user) {
-      root.classList.add('hidden');
-      return;
-    }
+    const isAdmin =
+      authData.user?.email?.toLowerCase() ===
+      'rensheijkamp2007@gmail.com';
 
-    root.classList.remove('hidden');
+    root.classList.toggle('hidden', !isAdmin);
+
+    if (!isAdmin) return;
+
     message.textContent = 'Advertenties laden...';
 
     const { data, error } = await db
       .from('community_submissions')
-      .select('*')
+      .select(
+        'id,name,description,price,category,condition,contact_email,photo_path,status'
+      )
       .eq('status', 'pending')
       .order('created_at', { ascending: true });
 
@@ -66,25 +68,29 @@ if (dashboard) {
       title.textContent =
         `${item.name} — €${Number(item.price).toFixed(2)}`;
 
-      const description = document.createElement('p');
-      description.style.whiteSpace = 'pre-wrap';
-      description.textContent =
-        `${item.description}
+      const desc = document.createElement('p');
+      desc.style.whiteSpace = 'pre-wrap';
+
+      desc.textContent = `
+${item.description}
 Categorie: ${item.category}
 Staat: ${item.condition}
-Contact: ${item.contact_email}`;
+Contact: ${item.contact_email}
+      `.trim();
 
       const photo = document.createElement('img');
+
       photo.style.cssText =
         'max-width:220px;max-height:180px;object-fit:contain;display:block;margin:12px 0';
+
+      photo.alt = item.name;
 
       const { data: photoData } = await db.storage
         .from('community-photos')
         .createSignedUrl(item.photo_path, 120);
 
-      if (photoData) {
+      if (photoData?.signedUrl) {
         photo.src = photoData.signedUrl;
-        photo.alt = item.name;
       }
 
       const approve = document.createElement('button');
@@ -95,15 +101,21 @@ Contact: ${item.contact_email}`;
       reject.className = 'btn secondary';
       reject.textContent = 'Afwijzen';
 
-      approve.onclick = () =>
-        decide(item, 'approved', approve, reject);
+      approve.addEventListener('click', () =>
+        decide(item.id, 'approved', approve, reject)
+      );
 
-      reject.onclick = () =>
-        decide(item, 'rejected', approve, reject);
+      reject.addEventListener('click', () =>
+        decide(item.id, 'rejected', approve, reject)
+      );
 
       el.append(
-        title, description, photo,
-        approve, ' ', reject
+        title,
+        desc,
+        photo,
+        approve,
+        ' ',
+        reject
       );
 
       list.append(el);
@@ -114,55 +126,31 @@ Contact: ${item.contact_email}`;
     }
   }
 
-  async function decide(item, decision, approve, reject) {
+  async function decide(id, decision, approve, reject) {
     approve.disabled = true;
     reject.disabled = true;
+
     message.textContent = 'Verwerken...';
 
-    try {
-      if (decision === 'approved') {
-        const { data: photoData } = db.storage
-          .from('community-photos')
-          .getPublicUrl(item.photo_path);
-
-        const { error: productError } = await db
-          .from('products')
-          .insert({
-            name: item.name,
-            description:
-              item.description +
-              '\nAangeboden door een externe verkoper. Contact via NextFind.',
-            category: item.category,
-            condition: item.condition,
-            price: item.price,
-            image_url: photoData.publicUrl,
-            available: true
-          });
-
-        if (productError) throw productError;
+    const { data, error } = await db.rpc(
+      'review_nextfind_submission',
+      {
+        p_id: id,
+        p_decision: decision
       }
+    );
 
-      const { error } = await db
-        .from('community_submissions')
-        .update({ status: decision })
-        .eq('id', item.id)
-        .eq('status', 'pending');
-
-      if (error) throw error;
-
-      message.textContent =
-        decision === 'approved'
-          ? 'Advertentie goedgekeurd.'
-          : 'Advertentie afgewezen.';
-
-      await refresh();
-
-    } catch (error) {
+    if (error) {
       message.textContent = 'Fout: ' + error.message;
-    } finally {
+
       approve.disabled = false;
       reject.disabled = false;
+      return;
     }
+
+    await refresh();
+
+    message.textContent = data || 'Verwerkt.';
   }
 
   db.auth.onAuthStateChange(() => {
