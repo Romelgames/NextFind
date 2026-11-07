@@ -1,0 +1,1154 @@
+
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#111111">
+<meta name="description" content="NextFind — bijzondere tweedehands vondsten voor een eerlijke prijs.">
+<title>NextFind — Goed gevonden. Opnieuw geliefd.</title>
+<style>
+:root{
+  --black:#111111;
+  --white:#ffffff;
+  --cream:#f7f7f5;
+  --gray:#777777;
+  --line:#e7e7e5;
+  --green:#25724d;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:Inter,-apple-system,BlinkMacSystemFont,
+  "Segoe UI",Arial,sans-serif;
+  color:var(--black);
+  background:var(--white);
+}
+button,input{font:inherit}
+button{cursor:pointer}
+a{color:inherit;text-decoration:none}
+.container{
+  max-width:1280px;
+  margin:auto;
+  padding:0 24px;
+}
+.announcement{
+  background:#111;
+  color:#fff;
+  text-align:center;
+  padding:10px;
+  font-size:11px;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+}
+header{
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:#ffffffed;
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--line);
+}
+.nav{
+  min-height:82px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+}
+.logo{
+  font-size:29px;
+  font-weight:900;
+  letter-spacing:-1.8px;
+}
+.logo span{color:#9b9b9b}
+.navlinks{
+  display:flex;
+  gap:28px;
+  font-size:13px;
+  font-weight:600;
+}
+.navlinks a:hover{color:#777}
+.navright{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.navbtn{
+  border:1px solid var(--line);
+  background:white;
+  padding:11px 15px;
+  font-size:12px;
+  font-weight:700;
+}
+.hero{
+  background:#f0efed;
+  min-height:510px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  overflow:hidden;
+}
+.hero-content{
+  padding:85px max(35px,calc((100vw - 1230px)/2));
+  padding-right:35px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:flex-start;
+}
+.eyebrow{
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:2.4px;
+  text-transform:uppercase;
+}
+.hero h1{
+  font-size:clamp(45px,5.8vw,86px);
+  letter-spacing:-5px;
+  line-height:.99;
+  margin:23px 0;
+  font-weight:800;
+}
+.hero h1 em{
+  font-style:normal;
+  color:#888;
+}
+.hero p{
+  font-size:15px;
+  line-height:1.9;
+  color:#666;
+  max-width:390px;
+  margin-bottom:28px;
+}
+.blackbtn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  background:#111;
+  color:white;
+  border:1px solid #111;
+  padding:17px 25px;
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:.6px;
+  transition:.2s;
+}
+.blackbtn:hover{background:#333}
+.hero-image{
+  min-height:510px;
+  position:relative;
+  background:#d9d8d4;
+}
+.hero-image img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  position:absolute;
+  inset:0;
+  filter:saturate(.7);
+}
+.hero-tag{
+  position:absolute;
+  bottom:25px;
+  left:25px;
+  background:white;
+  padding:14px 18px;
+  font-size:12px;
+  font-weight:700;
+}
+.benefits{
+  border-bottom:1px solid var(--line);
+}
+.benefit-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+  padding-top:27px;
+  padding-bottom:27px;
+}
+.benefit{
+  display:flex;
+  gap:12px;
+  align-items:center;
+}
+.benefit-icon{
+  width:42px;
+  height:42px;
+  display:grid;
+  place-items:center;
+  background:#f4f4f3;
+  border-radius:50%;
+  font-size:19px;
+}
+.benefit strong{
+  display:block;
+  font-size:12px;
+}
+.benefit small{
+  color:#888;
+  font-size:11px;
+}
+.section{
+  padding:80px 0;
+}
+.section-heading{
+  display:flex;
+  align-items:end;
+  justify-content:space-between;
+  gap:20px;
+  margin-bottom:35px;
+}
+.section-heading h2{
+  font-size:clamp(31px,4vw,49px);
+  margin:10px 0 0;
+  letter-spacing:-2px;
+}
+.section-heading p{
+  color:#777;
+  font-size:13px;
+  max-width:350px;
+  line-height:1.8;
+}
+.toolbar{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  justify-content:space-between;
+  margin-bottom:30px;
+}
+.categories{
+  display:flex;
+  gap:7px;
+  flex-wrap:wrap;
+}
+.category{
+  border:1px solid #ddd;
+  background:white;
+  padding:12px 17px;
+  font-size:12px;
+  font-weight:700;
+}
+.category.active{
+  background:#111;
+  color:#fff;
+  border-color:#111;
+}
+.searchbox{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
+.searchbox input,.searchbox select{
+  border:1px solid #ddd;
+  background:white;
+  color:#111;
+  padding:12px 13px;
+  outline:none;
+  font-size:12px;
+  min-width:155px;
+}
+.searchbox input:focus{border-color:#111}
+.products{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:30px 20px;
+}
+.product{
+  min-width:0;
+  cursor:pointer;
+}
+.product-photo{
+  position:relative;
+  aspect-ratio:1/1.07;
+  overflow:hidden;
+  background:#f0f0ee;
+}
+.product-photo img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:transform .45s;
+}
+.product:hover img{transform:scale(1.055)}
+.tag{
+  position:absolute;
+  left:14px;
+  top:14px;
+  background:white;
+  padding:9px 12px;
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:.5px;
+}
+.tag.sold{
+  background:#111;
+  color:white;
+}
+.product-body{
+  padding:17px 2px 4px;
+}
+.product-category{
+  color:#999;
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:1.3px;
+  text-transform:uppercase;
+}
+.product-title{
+  font-size:17px;
+  font-weight:750;
+  margin:9px 0;
+  letter-spacing:-.4px;
+}
+.product-desc{
+  font-size:12px;
+  color:#777;
+  line-height:1.6;
+  min-height:38px;
+}
+.product-bottom{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-top:16px;
+}
+.price{
+  font-size:21px;
+  font-weight:850;
+  letter-spacing:-.7px;
+}
+.view{
+  font-size:11px;
+  font-weight:800;
+  border-bottom:1px solid #111;
+  padding-bottom:4px;
+}
+.empty{
+  grid-column:1/-1;
+  padding:65px 20px;
+  background:#f7f7f5;
+  text-align:center;
+}
+.empty h3{font-size:24px}
+.empty p{color:#777;font-size:13px}
+.story{
+  background:#171717;
+  color:white;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+}
+.story-image{
+  min-height:440px;
+  position:relative;
+}
+.story-image img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  position:absolute;
+  inset:0;
+}
+.story-content{
+  padding:75px max(30px,8vw);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:flex-start;
+}
+.story h2{
+  font-size:clamp(36px,4vw,58px);
+  line-height:1.05;
+  letter-spacing:-2px;
+  margin:18px 0;
+}
+.story p{
+  color:#bbb;
+  font-size:14px;
+  line-height:1.9;
+}
+.whitebtn{
+  border:0;
+  background:white;
+  color:#111;
+  padding:16px 23px;
+  margin-top:20px;
+  font-weight:800;
+  font-size:12px;
+}
+.faq{
+  max-width:800px;
+  margin:auto;
+}
+.faq details{
+  padding:22px 0;
+  border-bottom:1px solid var(--line);
+}
+.faq summary{
+  font-size:15px;
+  font-weight:750;
+  cursor:pointer;
+}
+.faq p{
+  font-size:13px;
+  line-height:1.9;
+  color:#777;
+}
+footer{
+  background:#f6f6f4;
+  padding:60px 0 30px;
+}
+.footergrid{
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr;
+  gap:40px;
+}
+.footergrid p{
+  color:#777;
+  font-size:13px;
+  line-height:1.8;
+  max-width:350px;
+}
+.footergrid h4{
+  font-size:12px;
+  text-transform:uppercase;
+  letter-spacing:1px;
+}
+.footergrid a{
+  display:block;
+  font-size:12px;
+  color:#666;
+  margin:14px 0;
+}
+.copyright{
+  border-top:1px solid #ddd;
+  margin-top:45px;
+  padding-top:25px;
+  font-size:11px;
+  color:#888;
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+}
+.modal{
+  position:fixed;
+  inset:0;
+  z-index:300;
+  background:#000b;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+.modal.open{display:flex}
+.modal-panel{
+  width:min(950px,100%);
+  max-height:92dvh;
+  overflow:auto;
+  background:white;
+  position:relative;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+}
+.modal-image{
+  background:#f2f2f2;
+  min-height:430px;
+}
+.modal-image img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+.modal-info{
+  padding:45px 35px;
+}
+.modal-info h2{
+  font-size:36px;
+  letter-spacing:-1.5px;
+  margin:12px 0;
+}
+.modal-info p{
+  color:#777;
+  line-height:1.8;
+  font-size:14px;
+}
+.modal-info .price{
+  font-size:31px;
+  margin:25px 0;
+}
+.close{
+  position:absolute;
+  top:12px;
+  right:12px;
+  width:40px;
+  height:40px;
+  border:0;
+  background:#fff;
+  font-size:24px;
+  z-index:2;
+}
+.detail-list{
+  border-top:1px solid #eee;
+  margin:22px 0;
+}
+.detail-row{
+  display:flex;
+  justify-content:space-between;
+  border-bottom:1px solid #eee;
+  padding:13px 0;
+  font-size:12px;
+  gap:15px;
+}
+.detail-row span{color:#888}
+.detail-row strong{text-align:right}
+.reserve{
+  width:100%;
+  margin-top:12px;
+}
+.notice{
+  font-size:11px!important;
+  color:#999!important;
+}
+.demo{
+  position:fixed;
+  bottom:15px;
+  left:15px;
+  background:#111;
+  color:#fff;
+  padding:11px 14px;
+  z-index:90;
+  font-size:10px;
+  border-radius:5px;
+  box-shadow:0 5px 20px #0003;
+}
+@media(max-width:900px){
+  .hero h1{letter-spacing:-3px}
+  .hero-content{padding:50px 28px}
+  .products{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .navlinks{display:none}
+  .story-content{padding:45px 30px}
+}
+@media(max-width:650px){
+  .container{padding:0 17px}
+  .announcement{font-size:9px}
+  .nav{min-height:66px}
+  .logo{font-size:25px}
+  .navbtn{padding:10px;font-size:10px}
+  .hero{grid-template-columns:1fr}
+  .hero-content{padding:55px 24px}
+  .hero h1{font-size:53px}
+  .hero-image{min-height:290px}
+  .benefit-grid{
+    grid-template-columns:1fr;
+    gap:15px;
+    padding-top:22px;
+    padding-bottom:22px;
+  }
+  .section{padding:55px 0}
+  .section-heading{display:block}
+  .section-heading h2{font-size:37px}
+  .toolbar{display:block}
+  .categories{margin-bottom:16px}
+  .category{padding:10px 12px;font-size:11px}
+  .searchbox input{flex:1;min-width:130px}
+  .searchbox select{flex:1;min-width:120px}
+  .products{gap:24px 12px}
+  .product-title{font-size:14px}
+  .product-desc{font-size:11px}
+  .price{font-size:18px}
+  .view{font-size:10px}
+  .tag{font-size:9px;padding:7px}
+  .story{grid-template-columns:1fr}
+  .story-image{min-height:260px}
+  .footergrid{grid-template-columns:1fr 1fr;gap:25px}
+  .footergrid>div:first-child{grid-column:1/-1}
+  .modal{padding:8px}
+  .modal-panel{grid-template-columns:1fr;max-height:96dvh}
+  .modal-image{min-height:0;height:260px}
+  .modal-info{padding:25px}
+  .modal-info h2{font-size:27px}
+  .copyright{flex-direction:column}
+  .demo{bottom:8px;left:8px;font-size:9px}
+}
+</style>
+</head>
+<body>
+
+<div class="announcement">
+  UNIEKE VONDSTEN • TWEEDEHANDS MET KARAKTER
+</div>
+
+<header>
+  <div class="container nav">
+    <a class="logo" href="#">NEXT<span>FIND.</span></a>
+
+    <nav class="navlinks">
+      <a href="#producten">Collectie</a>
+      <a href="#over">Ons verhaal</a>
+      <a href="#vragen">Veelgestelde vragen</a>
+    </nav>
+
+    <div class="navright">
+      <a class="navbtn" href="#producten">BEKIJK COLLECTIE ↗</a>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="hero">
+  <div class="hero-content">
+    <div class="eyebrow">WELCOME TO NEXTFIND</div>
+    <h1>Goed<br>gevonden.<br><em>Opnieuw<br>geliefd.</em></h1>
+    <p>
+      Mooie tweedehands spullen verdienen een nieuw
+      verhaal. Ontdek unieke vondsten, zorgvuldig
+      geselecteerd en aantrekkelijk geprijsd.
+    </p>
+    <a class="blackbtn" href="#producten">
+      ONTDEK DE COLLECTIE <span>↗</span>
+    </a>
+  </div>
+
+  <div class="hero-image">
+    <img
+      src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1400&q=85"
+      alt="Modern interieur"
+    >
+    <div class="hero-tag">SECOND LIFE. FIRST CHOICE.</div>
+  </div>
+</section>
+
+<section class="benefits">
+  <div class="container benefit-grid">
+    <div class="benefit">
+      <div class="benefit-icon">◇</div>
+      <div>
+        <strong>Unieke producten</strong>
+        <small>Steeds wisselende vondsten</small>
+      </div>
+    </div>
+    <div class="benefit">
+      <div class="benefit-icon">✓</div>
+      <div>
+        <strong>Duidelijke informatie</strong>
+        <small>Staat en gebreken vermeld</small>
+      </div>
+    </div>
+    <div class="benefit">
+      <div class="benefit-icon">↗</div>
+      <div>
+        <strong>Direct contact</strong>
+        <small>Informeer via WhatsApp</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="producten">
+  <div class="container">
+    <div class="section-heading">
+      <div>
+        <div class="eyebrow">THE COLLECTION</div>
+        <h2>Onze vondsten<span style="color:#999">.</span></h2>
+      </div>
+      <p>
+        Van bijzondere meubels tot handige elektronica.
+        Ontdek wat er momenteel beschikbaar is.
+      </p>
+    </div>
+
+    <div class="toolbar">
+      <div class="categories" id="categories">
+        <button class="category active" data-category="Alles">Alles</button>
+        <button class="category" data-category="Meubels">Meubels</button>
+        <button class="category" data-category="Elektronica">Elektronica</button>
+        <button class="category" data-category="Gaming">Gaming</button>
+        <button class="category" data-category="Overig">Overig</button>
+      </div>
+
+      <div class="searchbox">
+        <input id="search" type="search" placeholder="Zoek een product...">
+        <select id="sort" aria-label="Sorteer producten">
+          <option value="new">Nieuwste eerst</option>
+          <option value="low">Prijs: laag naar hoog</option>
+          <option value="high">Prijs: hoog naar laag</option>
+          <option value="az">Naam A–Z</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="products" id="products"></div>
+
+    <p id="count" style="font-size:12px;color:#888;margin-top:25px"></p>
+  </div>
+</section>
+
+<section class="story" id="over">
+  <div class="story-image">
+    <img
+      src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1200&q=85"
+      alt="Sfeervol interieur"
+      loading="lazy"
+    >
+  </div>
+  <div class="story-content">
+    <div class="eyebrow">ABOUT NEXTFIND</div>
+    <h2>Een tweede leven.<br>Een nieuwe kans.</h2>
+    <p>
+      NextFind is ontstaan vanuit een simpel idee:
+      goede spullen hoeven niet nieuw te zijn.
+      Wij zoeken naar interessante tweedehands
+      producten en helpen ze een nieuwe eigenaar
+      te vinden.
+    </p>
+    <p>
+      Geen massaproductie, maar steeds een andere
+      collectie met unieke vondsten.
+    </p>
+    <a class="whitebtn" href="#producten">BEKIJK DE PRODUCTEN ↗</a>
+  </div>
+</section>
+
+<section class="section" id="vragen">
+  <div class="container">
+    <div class="section-heading">
+      <div>
+        <div class="eyebrow">GOOD TO KNOW</div>
+        <h2>Veelgestelde vragen.</h2>
+      </div>
+    </div>
+
+    <div class="faq">
+      <details>
+        <summary>Zijn alle producten tweedehands?</summary>
+        <p>
+          Ja, NextFind richt zich op tweedehands producten.
+          De staat en eventuele gebreken staan bij elk product.
+        </p>
+      </details>
+      <details>
+        <summary>Hoe reserveer ik een product?</summary>
+        <p>
+          Open een product en klik op de WhatsApp-knop.
+          Je kunt dan informeren naar de beschikbaarheid
+          en een afspraak maken.
+          Een bericht is nog geen bevestigde reservering.
+        </p>
+      </details>
+      <details>
+        <summary>Kan ik producten ophalen?</summary>
+        <p>
+          Ophalen kan in overleg. De exacte ophaallocatie
+          en het tijdstip worden persoonlijk afgesproken.
+        </p>
+      </details>
+      <details>
+        <summary>Kan ik producten laten verzenden?</summary>
+        <p>
+          Dit hangt af van het product. Vraag via WhatsApp
+          naar de mogelijkheden en eventuele verzendkosten.
+        </p>
+      </details>
+      <details>
+        <summary>Kan ik producten retourneren?</summary>
+        <p>
+          Bij zakelijke verkoop gelden wettelijke
+          consumentenrechten. De toepasselijke voorwaarden
+          moeten vóór de verkoop duidelijk worden verstrekt.
+        </p>
+      </details>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footergrid">
+      <div>
+        <div class="logo">NEXT<span>FIND.</span></div>
+        <p>
+          Unieke tweedehands vondsten.
+          Goed gevonden, opnieuw geliefd.
+        </p>
+      </div>
+      <div>
+        <h4>Ontdek</h4>
+        <a href="#producten">Alle producten</a>
+        <a href="#over">Over NextFind</a>
+        <a href="#vragen">Veelgestelde vragen</a>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <a href="#" id="footerWhatsapp">WhatsApp</a>
+        <a href="#vragen">Verzenden en ophalen</a>
+        <a href="#vragen">Retourinformatie</a>
+      </div>
+    </div>
+    <div class="copyright">
+      <span>© <span id="year"></span> NEXTFIND. ALLE RECHTEN VOORBEHOUDEN.</span>
+      <span>TWEEDEHANDS. OPNIEUW ONTDEKT.</span>
+    </div>
+  </div>
+</footer>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-label="Productdetails">
+  <div class="modal-panel">
+    <button class="close" id="close" aria-label="Sluiten">×</button>
+    <div class="modal-image">
+      <img id="modalImg" src="" alt="">
+    </div>
+    <div class="modal-info">
+      <div class="product-category" id="modalCategory"></div>
+      <h2 id="modalTitle"></h2>
+      <p id="modalDesc"></p>
+      <div class="price" id="modalPrice"></div>
+
+      <div class="detail-list">
+        <div class="detail-row">
+          <span>Conditie</span>
+          <strong id="modalCondition"></strong>
+        </div>
+        <div class="detail-row">
+          <span>Categorie</span>
+          <strong id="modalCat2"></strong>
+        </div>
+        <div class="detail-row">
+          <span>Beschikbaarheid</span>
+          <strong id="modalStock"></strong>
+        </div>
+      </div>
+
+      <button class="blackbtn reserve" id="reserve">
+        INFORMEER VIA WHATSAPP ↗
+      </button>
+      <p class="notice">
+        Je opent WhatsApp met een vooraf ingevuld bericht.
+        De verkoper bevestigt persoonlijk of het product
+        beschikbaar is.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="demo">DEMO — VOORBEELDPRODUCTEN</div>
+
+<script>
+// ============================================
+// NEXTFIND INSTELLINGEN
+// ============================================
+
+// VERVANG DIT DOOR JE EIGEN NUMMER.
+// Voorbeeld: 31612345678 = +31 6 12345678
+const WHATSAPP_NUMBER = "31612345678";
+
+// ============================================
+// PRODUCTEN
+// ============================================
+// Dit zijn VOORBEELDPRODUCTEN.
+// Vervang ze door spullen die je echt bezit.
+// Gebruik eigen foto's of foto's waarvoor
+// je toestemming hebt.
+//
+// Nieuw product toevoegen?
+// Kopieer één productblok en verander:
+// id, name, category, price, condition,
+// description, image, available en date.
+// ============================================
+
+const products = [
+  {
+    id:1,
+    name:"Minimalistische bureaustoel",
+    category:"Meubels",
+    price:35,
+    condition:"Gebruikt — goede staat",
+    description:"Comfortabele bureaustoel met een modern ontwerp. Voorbeeldproduct: vervang deze tekst door de werkelijke staat, afmetingen en eventuele gebreken.",
+    image:"https://images.unsplash.com/photo-1505797149-43b0069ec26b?auto=format&fit=crop&w=900&q=85",
+    available:true,
+    date:"2026-11-07"
+  },
+  {
+    id:2,
+    name:"Houten bijzettafel",
+    category:"Meubels",
+    price:25,
+    condition:"Gebruikt — goede staat",
+    description:"Compacte houten bijzettafel voor woonkamer of slaapkamer. Demonstratieproduct, niet werkelijk beschikbaar.",
+    image:"https://images.unsplash.com/photo-1499933374294-4584851497cc?auto=format&fit=crop&w=900&q=85",
+    available:true,
+    date:"2026-11-06"
+  },
+  {
+    id:3,
+    name:"Gaming toetsenbord",
+    category:"Gaming",
+    price:29.95,
+    condition:"Gebruikt — werkend",
+    description:"Gamingtoetsenbord voor een complete bureau-setup. Demonstratieproduct: controleer de werking voordat je een echt product aanbiedt.",
+    image:"https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=900&q=85",
+    available:true,
+    date:"2026-11-05"
+  },
+  {
+    id:4,
+    name:"Vintage tafellamp",
+    category:"Overig",
+    price:19.95,
+    condition:"Gebruikt — goede staat",
+    description:"Sfeervolle tafellamp met karakter. Dit is een voorbeeldvermelding en geen werkelijk aanbod.",
+    image:"https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=900&q=85",
+    available:true,
+    date:"2026-11-04"
+  },
+  {
+    id:5,
+    name:"Compacte monitor",
+    category:"Elektronica",
+    price:45,
+    condition:"Gebruikt — werkend",
+    description:"Monitor voor thuiswerken of een tweede scherm. Voorbeeldproduct: vermeld bij een echte advertentie merk, formaat, aansluitingen en testresultaten.",
+    image:"https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&w=900&q=85",
+    available:true,
+    date:"2026-11-03"
+  },
+  {
+    id:6,
+    name:"Design loungestoel",
+    category:"Meubels",
+    price:65,
+    condition:"Gebruikt — lichte gebruikssporen",
+    description:"Stijlvolle loungestoel voor een modern interieur. Demonstratieproduct, niet werkelijk beschikbaar.",
+    image:"https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&w=900&q=85",
+    available:false,
+    date:"2026-11-02"
+  }
+];
+
+// ============================================
+// WEBSHOP FUNCTIES
+// ============================================
+
+let activeCategory="Alles";
+let activeProduct=null;
+
+const euro=n=>new Intl.NumberFormat(
+  "nl-NL",
+  {style:"currency",currency:"EUR"}
+).format(n);
+
+const $=id=>document.getElementById(id);
+
+function escapeHTML(value){
+  return String(value).replace(/[&<>"']/g,char=>({
+    "&":"&amp;",
+    "<":"&lt;",
+    ">":"&gt;",
+    '"':"&quot;",
+    "'":"&#39;"
+  })[char]);
+}
+
+function renderProducts(){
+  const query=$("search").value
+    .trim().toLowerCase();
+  const sort=$("sort").value;
+
+  let list=products.filter(p=>{
+    const categoryMatch=
+      activeCategory==="Alles"||
+      p.category===activeCategory;
+
+    const text=[
+      p.name,p.category,p.description,
+      p.condition
+    ].join(" ").toLowerCase();
+
+    return categoryMatch&&text.includes(query);
+  });
+
+  list=[...list];
+
+  if(sort==="low"){
+    list.sort((a,b)=>a.price-b.price);
+  }else if(sort==="high"){
+    list.sort((a,b)=>b.price-a.price);
+  }else if(sort==="az"){
+    list.sort((a,b)=>a.name.localeCompare(b.name,"nl"));
+  }else{
+    list.sort((a,b)=>b.date.localeCompare(a.date));
+  }
+
+  const grid=$("products");
+  grid.replaceChildren();
+
+  if(!list.length){
+    grid.innerHTML=`
+      <div class="empty">
+        <h3>Geen producten gevonden.</h3>
+        <p>Probeer een andere zoekterm of categorie.</p>
+      </div>
+    `;
+  }
+
+  for(const p of list){
+    const article=document.createElement("article");
+    article.className="product";
+    article.tabIndex=0;
+    article.setAttribute("role","button");
+    article.setAttribute(
+      "aria-label","Bekijk "+p.name
+    );
+
+    article.innerHTML=`
+      <div class="product-photo">
+        <img
+          src="${escapeHTML(p.image)}"
+          alt="${escapeHTML(p.name)}"
+          loading="lazy"
+        >
+        <span class="tag ${p.available?"":"sold"}">
+          ${p.available?"TWEEDEHANDS":"VERKOCHT"}
+        </span>
+      </div>
+      <div class="product-body">
+        <div class="product-category">
+          ${escapeHTML(p.category)}
+        </div>
+        <h3 class="product-title">
+          ${escapeHTML(p.name)}
+        </h3>
+        <div class="product-desc">
+          ${escapeHTML(p.condition)}
+        </div>
+        <div class="product-bottom">
+          <div class="price">${euro(p.price)}</div>
+          <span class="view">BEKIJK ↗</span>
+        </div>
+      </div>
+    `;
+
+    article.addEventListener("click",()=>openProduct(p.id));
+
+    article.addEventListener("keydown",e=>{
+      if(e.key==="Enter"||e.key===" "){
+        e.preventDefault();
+        openProduct(p.id);
+      }
+    });
+
+    grid.append(article);
+  }
+
+  $("count").textContent=
+    list.length+" product(en) gevonden";
+}
+
+function openProduct(id){
+  const p=products.find(x=>x.id===id);
+  if(!p)return;
+
+  activeProduct=p;
+
+  $("modalImg").src=p.image;
+  $("modalImg").alt=p.name;
+  $("modalCategory").textContent=p.category;
+  $("modalTitle").textContent=p.name;
+  $("modalDesc").textContent=p.description;
+  $("modalPrice").textContent=euro(p.price);
+  $("modalCondition").textContent=p.condition;
+  $("modalCat2").textContent=p.category;
+  $("modalStock").textContent=
+    p.available?"Beschikbaar":"Verkocht";
+
+  $("reserve").disabled=!p.available;
+  $("reserve").style.opacity=p.available?"1":".4";
+  $("reserve").textContent=p.available
+    ?"INFORMEER VIA WHATSAPP ↗"
+    :"DIT PRODUCT IS VERKOCHT";
+
+  $("modal").classList.add("open");
+  document.body.style.overflow="hidden";
+}
+
+function closeProduct(){
+  $("modal").classList.remove("open");
+  document.body.style.overflow="";
+}
+
+function whatsapp(message){
+  if(
+    WHATSAPP_NUMBER==="31612345678"||
+    !/^[1-9]\d{7,14}$/.test(WHATSAPP_NUMBER)
+  ){
+    alert(
+      "Vul eerst je eigen WhatsApp-nummer in "+
+      "bij WHATSAPP_NUMBER in de HTML-code."
+    );
+    return;
+  }
+
+  const url="https://wa.me/"+
+    WHATSAPP_NUMBER+
+    "?text="+encodeURIComponent(message);
+
+  window.open(url,"_blank","noopener,noreferrer");
+}
+
+function reserveProduct(){
+  const p=activeProduct;
+  if(!p||!p.available)return;
+
+  const message=
+    "Hallo NextFind! Ik heb interesse in:\n\n"+
+    "Product: "+p.name+"\n"+
+    "Productnummer: NF-"+p.id+"\n"+
+    "Prijs: "+euro(p.price)+"\n\n"+
+    "Is dit product nog beschikbaar?";
+
+  whatsapp(message);
+}
+
+// ============================================
+// EVENTS
+// ============================================
+
+document.querySelectorAll(".category")
+.forEach(button=>{
+  button.addEventListener("click",()=>{
+    document.querySelectorAll(".category")
+    .forEach(b=>b.classList.remove("active"));
+
+    button.classList.add("active");
+    activeCategory=button.dataset.category;
+    renderProducts();
+  });
+});
+
+$("search").addEventListener("input",renderProducts);
+$("sort").addEventListener("change",renderProducts);
+$("close").addEventListener("click",closeProduct);
+$("reserve").addEventListener("click",reserveProduct);
+
+$("modal").addEventListener("click",e=>{
+  if(e.target===$("modal"))closeProduct();
+});
+
+document.addEventListener("keydown",e=>{
+  if(e.key==="Escape")closeProduct();
+});
+
+$("footerWhatsapp").addEventListener("click",e=>{
+  e.preventDefault();
+  whatsapp(
+    "Hallo NextFind! Ik heb een vraag over jullie producten."
+  );
+});
+
+$("year").textContent=new Date().getFullYear();
+
+renderProducts();
+</script>
+</body>
+</html>
