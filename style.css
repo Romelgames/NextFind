@@ -149,3 +149,23 @@ textarea.field{min-height:110px;resize:vertical}
   .grid{grid-template-columns:1fr}
   .logo{font-size:24px}
 }
+
+/* NextFind - toestemming netjes naast checkbox */
+#consent {
+  display: inline-block !important;
+  width: 18px !important;
+  height: 18px !important;
+  margin: 0 !important;
+  flex: 0 0 18px !important;
+}
+
+#consent + label {
+  display: inline !important;
+  width: auto !important;
+  margin: 0 !important;
+}
+
+#consent:focus-visible {
+  outline: 2px solid black;
+  outline-offset: 3px;
+}
