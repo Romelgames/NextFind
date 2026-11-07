@@ -1,0 +1,83 @@
+
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NextFind Manager</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="top">NEXTFIND · MANAGER</div>
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="index.html">NEXT<span>FIND.</span></a>
+    <a href="index.html">← Terug naar winkel</a>
+  </div>
+</header>
+<main class="section">
+  <div class="wrap">
+    <div class="eyebrow">PRIVATE MANAGEMENT</div>
+    <h1>Productbeheer.</h1>
+    <p class="muted">Alleen een geautoriseerd account kan producten aanpassen. Gebruik je Supabase-account om in te loggen.</p>
+
+    <div class="panel" id="loginPanel">
+      <form id="loginForm" class="form-grid">
+        <label>E-mailadres
+          <input class="field" type="email" id="email" autocomplete="username" required>
+        </label>
+        <label>Wachtwoord
+          <input class="field" type="password" id="password" autocomplete="current-password" required>
+        </label>
+        <div class="full"><button class="btn" type="submit">INLOGGEN</button></div>
+      </form>
+    </div>
+
+    <div id="dashboard" class="hidden">
+      <button id="logout" class="btn secondary">Uitloggen</button>
+      <div class="panel">
+        <h2 id="formTitle">Nieuw product</h2>
+        <form id="productForm" class="form-grid">
+          <label>Productnaam
+            <input class="field" id="name" required maxlength="150">
+          </label>
+          <label>Prijs in euro's
+            <input class="field" id="price" type="number" min="0" step="0.01" required>
+          </label>
+          <label>Categorie
+            <select class="field" id="category">
+              <option>Meubels</option><option>Elektronica</option>
+              <option>Gaming</option><option>Overig</option>
+            </select>
+          </label>
+          <label>Conditie
+            <input class="field" id="condition" value="Gebruikt — goede staat" required>
+          </label>
+          <label class="full">Beschrijving
+            <textarea class="field" id="description" required></textarea>
+          </label>
+          <label>Foto uploaden (JPG, PNG of WebP, max. 5 MB)
+            <input class="field" id="image" type="file" accept="image/jpeg,image/png,image/webp">
+          </label>
+          <label>Beschikbaarheid
+            <select class="field" id="available">
+              <option value="true">Te koop</option>
+              <option value="false">Verkocht</option>
+            </select>
+          </label>
+          <div class="full">
+            <button class="btn" type="submit" id="save">PRODUCT OPSLAAN</button>
+            <button class="btn secondary" type="button" id="cancel">Annuleren</button>
+          </div>
+        </form>
+      </div>
+      <h2>Mijn producten</h2>
+      <div id="list" class="admin-list"></div>
+    </div>
+    <p id="status" class="status" role="status"></p>
+  </div>
+</main>
+<script src="config.js"></script>
+<script type="module" src="admin.js"></script>
+</body>
+</html>
