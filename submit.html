@@ -118,12 +118,17 @@
                      type="email" required>
             </label>
 
-            <label class="full">
-              <input id="consent" type="checkbox" required>
-              Ik geef toestemming dat NextFind mijn gegevens
-              gebruikt om contact over deze advertentie
-              en kopersaanvragen mogelijk te maken.
-            </label>
+            
+<label class="full" style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;">
+  <input id="consent" type="checkbox" required
+         style="width:18px;height:18px;flex-shrink:0;margin-top:3px;">
+  <span>
+    Ik geef toestemming dat NextFind mijn gegevens gebruikt
+    om contact over deze advertentie en kopersaanvragen
+    mogelijk te maken.
+  </span>
+</label>
+
 
             <div class="full">
               <button class="btn" id="send" type="submit">
